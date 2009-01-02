@@ -6,7 +6,6 @@ require 'config'
 
 class Speller
 	def self.fix phrase
-		phrase.gsub!(/,/,'')
 	  corrections = google(phrase)["spellresult"]["c"]
 		if corrections.kind_of? Hash
 			corrections = [corrections]
@@ -15,8 +14,13 @@ class Speller
 		end
 	  words = phrase.split
 		corrections.each do |hash|
+			appendum = ''
 			word = phrase[hash["o"].to_i, hash["l"].to_i]
-			words[words.index(word)] = hash["content"].split("\t").first
+			index = words.index(word)
+			index = words.index("#{word}#{appendum = '.'}") unless index
+			index = words.index("#{word}#{appendum = ','}") unless index
+			return "Couldn't find word #{word}" unless index
+			words[index] = hash["content"].split("\t").first + appendum
 		end
 		words.join(" ")
 	end
