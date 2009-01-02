@@ -31,12 +31,10 @@ get '/' do
 	<<-EOF
 	<html>
 	<body>
-		<center>
 		Fix my spelling:
 		<form method='POST'>
 			<input type='text' name='text'/>
 		</form>
-		</center>
 	</body>
 	</html>
 	EOF
