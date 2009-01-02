@@ -6,6 +6,7 @@ require 'config'
 
 class Speller
 	def self.fix phrase
+		phrase.gsub!(/,/,'')
 	  corrections = google(phrase)["spellresult"]["c"]
 		if corrections.kind_of? Hash
 			corrections = [corrections]
