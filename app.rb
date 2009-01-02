@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'activesupport'
 require 'hashish'
+require 'config'
 
 class Speller
 	def self.fix phrase
